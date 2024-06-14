@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Quiz Application</title>
+  </head>
+  <body>
+    <div class="app">
+      <h1>Quiz Form</h1>
+      <div class="quiz">
+        <h2 id="formHeading">Jaldi Form bhar warna Sir ajainge</h2>
+        <form id="FormContainer">
+          <input
+            class="Input"
+            id="Name"
+            type="name"
+            placeholder="Enter Name..."
+            required
+          />
+          <span class="hide" id="nameError">Apna Name hi bhol gya</span>
+          <input
+            class="Input"
+            id="Email"
+            type="email"
+            placeholder="Enter Email..."
+            required
+          />
+          <span class="hide" id="emailError">Wah kia scene he ( Email ! )</span>
+          <button class="Submit-btn" onclick="SubmitButtonHandler()">
+            Submit
+          </button>
+        </form>
+        <div class="hide" id="StartContainer">
+          <a href="quiz.html">
+            <button class="Submit-btn" style="font-size: 8px">
+              To Chaliye Shoro krte hen!
+            </button>
+          </a>
+        </div>
+      </div>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>
