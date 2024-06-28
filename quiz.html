@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -41,6 +41,72 @@
         </div>
       </div>
     </div>
+    <div class="resulContainer hide">
+      result:
+      <div>
+        <p>correect ans :</p>
+        <p id="correctans"></p>
+      </div>
+    </div>
+    <div>
+      <p>Wrong ans:</p>
+      <p id="wrongans"></p>
+    </div>
+
+    <script src="quiz.js"></script>
+  </body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz Application</title>
+    <link rel="stylesheet" href="quiz.css" />
+  </head>
+  <body onload="startQuiz()">
+    <div class="app">
+      <div class="header show">
+        <div>
+          <div>
+            <span style="font-weight: 600">Name:</span>
+            <span id="userName">Khubaib</span>
+          </div>
+          <div>
+            <span style="font-weight: 600">Email:</span>
+            <span id="userEmail">khubaibsyed@gmail.com</span>
+          </div>
+        </div>
+        <div>
+          <span style="font-weight: 600">Timer</span>
+          <span id="Timer">07:00</span>
+        </div>
+      </div>
+      <div class="quiz">
+        <h2 id="Question">Question goes here</h2>
+        <div id="answer-buttons"></div>
+        <div>
+          <span id="currentCount">1</span> /
+          <span id="totalCount">1</span>
+        </div>
+        <div>
+          <button onclick="next()" id="next-btn">Next</button>
+        </div>
+      </div>
+    </div>
+    <div class="resulContainer hide app">
+      <h1>Result:</h1>
+      <div class="quiz">
+        <h2 id="Passed">Passed</h2>
+        <p>Correct answers:</p>
+        <p id="correctans"></p>
+      </div>
+      <div>
+        <p>Wrong answers:</p>
+        <p id="wrongans"></p>
+      </div>
+    </div>
+
     <script src="quiz.js"></script>
   </body>
 </html>

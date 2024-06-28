@@ -20,7 +20,10 @@ body {
   font-weight: 600;
   border-bottom: 1px solid #333;
   padding-bottom: 30px;
+  text-shadow: 1px 1px 1px #919191, 1px 2px 1px #919191, 
+    1px 20px 40px rgba(0, 0, 0, 0.3);
 }
+
 .quiz {
   padding: 20px 0px;
 }

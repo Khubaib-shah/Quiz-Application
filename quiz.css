@@ -61,3 +61,15 @@ body {
   border-bottom: 1px solid #333;
   padding-bottom: 30px;
 }
+.hide {
+  display: none;
+}
+.show {
+  display: show;
+}
+.correctAns {
+  background: green;
+}
+.wrongAns {
+  background: red;
+}

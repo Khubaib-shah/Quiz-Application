@@ -77,33 +77,92 @@ var questions = [
     answer: "HTML, Head, Title, Body",
   },
 ];
+
 var userName = document.getElementById("userName");
 var userEmail = document.getElementById("userEmail");
-userName.innerText = localStorage.getItem("name");
-userEmail.innerText = localStorage.getItem("email");
+userName.innerHTML = localStorage.getItem("name");
+userEmail.innerHTML = localStorage.getItem("email");
 
 var Question = document.getElementById("Question");
 var answerButtons = document.getElementById("answer-buttons");
 var indexNumber = 0;
 var currentCount = document.getElementById("currentCount");
+var correctAnsCount = 0;
+var wrongCount = 0;
 var totalCount = document.getElementById("totalCount");
 totalCount.innerHTML = questions.length;
-
+var nextQuestionbtn = document.getElementById("next-btn");
+var QuizContainer = document.getElementsByClassName("app")[0];
+var resultContainer = document.getElementsByClassName("resulContainer")[0];
+var correctans = document.getElementById("correctans");
+var wrongans = document.getElementById("wrongans");
 function startQuiz() {
   Question.innerHTML = questions[indexNumber].question;
   answerButtons.innerHTML = "";
+  intervalId = setInterval(updateTimer, intervalDuration);
   for (var key in questions[indexNumber].options) {
     var option = questions[indexNumber].options[key];
-    answerButtons.innerHTML += `<button class="btn">${option}</button>`;
+    answerButtons.innerHTML += `<button class="btn" onclick="checkAnswer(this)">${option}</button>`;
   }
-
 }
+
 function next() {
-    // console.log("hello world");
-    if (indexNumber < questions.length - 1) {
-      indexNumber++;
-      currentCount.innerHTML++;
-      console.log(indexNumber);
-      startQuiz();
+  if (indexNumber < questions.length - 1) {
+    indexNumber++;
+    currentCount.innerHTML++;
+    startQuiz();
+    nextQuestionbtn.classList.add("hide");
+  } else {
+    QuizContainer.classList.add("hide");
+    resultContainer.classList.remove("hide");
+    correctans.innerHTML = correctAnsCount;
+    wrongans.innerHTML = wrongCount;
+  }
+}
+
+function checkAnswer(ele) {
+  var isCorrect = ele.innerHTML === questions[indexNumber].answer;
+
+  if (isCorrect) {
+    ele.classList.add("correctAns");
+    correctAnsCount++;
+  } else {
+    ele.classList.add("wrongAns");
+    wrongCount++;
+    var buttons = answerButtons.getElementsByTagName("button");
+    for (var i = 0; i < buttons.length; i++) {
+      if (buttons[i].innerHTML === questions[indexNumber].answer) {
+        buttons[i].classList.add("correctAns");
+        break;
+      }
     }
   }
+
+  var buttons = answerButtons.getElementsByTagName("button");
+  for (var i = 0; i < buttons.length; i++) {
+    buttons[i].disabled = true;
+  }
+
+  nextQuestionbtn.classList.remove("hide");
+}
+let Timer = document.getElementById("Timer");
+let countDownValue = 4;
+var header = document.getElementById("header");
+const intervalDuration = 1000;
+let intervalId;
+function updateTimer() {
+  var app = document.getElementsByClassName("app");
+  let minutes = Math.floor(countDownValue / 60);
+  let seconds = countDownValue % 60;
+  let formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
+  let formattedSeconds = seconds < 10 ? `0${seconds}` : seconds;
+  Timer.innerText = `${formattedMinutes}:${formattedSeconds}`;
+  countDownValue--;
+  if (countDownValue < 0) {
+    clearInterval(intervalId);
+    Timer.innerText = "Countdown timer has finished!";
+    for (let i = 0; i < buttons.length; i++) {
+      buttons[i].style.pointerEvents = "none";
+    }
+  }
+}

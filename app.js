@@ -7,15 +7,17 @@ function SubmitButtonHandler() {
   var nameError = document.getElementById("nameError");
   var emailError = document.getElementById("emailError");
   var formHeading = document.getElementById("formHeading");
+  emailError.className = "hide";
+  nameError.className = "hide";
 
   if (!Name.value) {
     nameError.className = "show";
     nameError.style.color = "red";
     console.log(Name);
     return;
-}
-if (!Email.value) {
-      emailError.className = "show";
+  }
+  if (!Email.value) {
+    emailError.className = "show";
     emailError.style.color = "red";
     return;
   }
@@ -24,7 +26,5 @@ if (!Email.value) {
   FormContainer.className = "hide";
   StartContainer.className = "show";
   formHeading.innerText = "wow bery denguras";
-  emailError.className = "hide";
-  nameError.className = "hide";
-  console.log("form sudmitted")
+  alert = "form sudmitted";
 }
