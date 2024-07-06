@@ -97,32 +97,35 @@ var resultContainer = document.getElementsByClassName("resulContainer")[0];
 var correctans = document.getElementById("correctans");
 var wrongans = document.getElementById("wrongans");
 function startQuiz() {
+  clearInterval(intervalId);
   Question.innerHTML = questions[indexNumber].question;
   answerButtons.innerHTML = "";
-  intervalId = setInterval(updateTimer, intervalDuration);
   for (var key in questions[indexNumber].options) {
     var option = questions[indexNumber].options[key];
     answerButtons.innerHTML += `<button class="btn" onclick="checkAnswer(this)">${option}</button>`;
   }
+  intervalId = setInterval(updateTimer, intervalDuration);
 }
 
 function next() {
   if (indexNumber < questions.length - 1) {
     indexNumber++;
-    currentCount.innerHTML++;
-    startQuiz();
     nextQuestionbtn.classList.add("hide");
+    currentCount.innerHTML++;
+
+    startQuiz();
   } else {
     QuizContainer.classList.add("hide");
     resultContainer.classList.remove("hide");
     correctans.innerHTML = correctAnsCount;
     wrongans.innerHTML = wrongCount;
+    clearInterval(intervalId);
   }
 }
 
 function checkAnswer(ele) {
   var isCorrect = ele.innerHTML === questions[indexNumber].answer;
-
+  var Passed = document.getElementById("Passed");
   if (isCorrect) {
     ele.classList.add("correctAns");
     correctAnsCount++;
@@ -135,6 +138,11 @@ function checkAnswer(ele) {
         buttons[i].classList.add("correctAns");
         break;
       }
+      if (correctAnsCount >= 5) {
+        Passed.innerHTML = "Passed";
+      } else {
+        Passed.innerHTML = "Failed";
+      }
     }
   }
 
@@ -146,12 +154,11 @@ function checkAnswer(ele) {
   nextQuestionbtn.classList.remove("hide");
 }
 let Timer = document.getElementById("Timer");
-let countDownValue = 4;
+let countDownValue = 419;
 var header = document.getElementById("header");
 const intervalDuration = 1000;
 let intervalId;
 function updateTimer() {
-  var app = document.getElementsByClassName("app");
   let minutes = Math.floor(countDownValue / 60);
   let seconds = countDownValue % 60;
   let formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
@@ -161,8 +168,8 @@ function updateTimer() {
   if (countDownValue < 0) {
     clearInterval(intervalId);
     Timer.innerText = "Countdown timer has finished!";
-    for (let i = 0; i < buttons.length; i++) {
-      buttons[i].style.pointerEvents = "none";
-    }
   }
 }
+window.onload = function () {
+  startQuiz();
+};
